@@ -76,7 +76,7 @@ using (var scope = app.Services.CreateScope())
     if (adminUser == null)
     {
         adminUser = new ApplicationUser { UserName = "admin", Email = "admin@example.com",Position = "Manager" };
-        await userManager.CreateAsync(adminUser, "Admin@123");
+        await userManager.CreateAsync(adminUser, "Admin@123"); // passwrd is : Admin@123
         await userManager.AddToRoleAsync(adminUser, "Admin");
     }
 }

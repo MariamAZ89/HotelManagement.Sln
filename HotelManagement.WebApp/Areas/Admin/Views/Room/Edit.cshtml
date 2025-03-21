@@ -1,0 +1,30 @@
+﻿@model RoomViewModel
+
+<h2>Edit Room</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label class="form-label">Room Number</label>
+        <input asp-for="Number" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Type</label>
+        <select asp-for="Type" class="form-select">
+            @foreach (var type in Enum.GetValues(typeof(RoomType)))
+            {
+                <option value="@type">@type</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Price</label>
+        <input asp-for="Price" class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a href="/Admin/Room" class="btn btn-secondary">Cancel</a>
+</form>

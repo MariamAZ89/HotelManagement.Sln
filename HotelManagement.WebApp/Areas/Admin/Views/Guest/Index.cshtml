@@ -1,0 +1,34 @@
+﻿@model IEnumerable<GuestViewModel>
+@{
+    ViewData["Title"] = "Guest List";
+}
+<h2>Guest List</h2>
+<a href="/Admin/Guest/Create" class="btn btn-primary mb-3">Add New Guest</a>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var guest in Model)
+        {
+            <tr>
+                <td>@guest.Id</td>
+                <td>@guest.Name</td>
+                <td>@guest.Email</td>
+                <td>@guest.PhoneNumber</td>
+                <td>
+                    <a href="/Admin/Guest/Edit/@guest.Id" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="/Admin/Guest/Details/@guest.Id" class="btn btn-info btn-sm">Details</a>
+                    <a href="/Admin/Guest/Delete/@guest.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

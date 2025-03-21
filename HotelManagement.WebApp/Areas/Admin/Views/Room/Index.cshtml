@@ -1,0 +1,29 @@
+﻿@model IEnumerable<RoomViewModel>
+
+<h2>Rooms List</h2>
+<a href="/Admin/Room/Create" class="btn btn-primary mb-3">Add New Room</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Number</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var room in Model)
+        {
+            <tr>
+                <td>@room.Number</td>
+                <td>@room.Type</td>
+                <td>@room.Price</td>
+                <td>
+                    <a href="/Admin/Room/Edit/@room.Id" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="/Admin/Room/Delete/@room.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

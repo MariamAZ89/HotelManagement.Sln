@@ -25,7 +25,20 @@
                                 <a class="nav-link" asp-area="Admin" asp-controller="Reservation" asp-action="Index">Reservations</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Account" asp-action="Logout">Logout</a>
+                                <a class="nav-link" asp-area="Admin" asp-controller="Reservation" asp-action="Create">Add Reservations</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Admin" asp-controller="Guest" asp-action="Index">Guests</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Admin" asp-controller="Room" asp-action="Index">Rooms</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Logout">
+                                    <span class="text-primary">Logout : @User.Identity.Name</span>
+                                </a>
                             </li>
                         }
                         else

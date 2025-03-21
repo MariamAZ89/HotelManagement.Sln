@@ -15,4 +15,32 @@ public class GuestRepository : IGuestRepository
     {
         return await _context.Guests.ToListAsync();
     }
+
+    public async Task<Guest?> GetByIdAsync(int id)
+    {
+        return await _context.Guests.FindAsync(id);
+    }
+
+    public async Task AddAsync(Guest guest)
+    {
+        await _context.Guests.AddAsync(guest);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task UpdateAsync(Guest guest)
+    {
+        _context.Guests.Update(guest);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task DeleteAsync(int id)
+    {
+        var guest = await _context.Guests.FindAsync(id);
+        if (guest != null)
+        {
+            _context.Guests.Remove(guest);
+            await _context.SaveChangesAsync();
+        }
+    }
 }
+
