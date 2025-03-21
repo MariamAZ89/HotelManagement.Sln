@@ -7,4 +7,5 @@ public interface IReservationRepository
     Task AddAsync(Reservation reservation);
     Task UpdateAsync(Reservation reservation);
     Task DeleteAsync(int id);
+    Task<bool> IsRoomAvailableAsync(int roomId, DateTime startDate, DateTime endDate);
 }

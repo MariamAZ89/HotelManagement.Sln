@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ReservationViewModel>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Reservations";
+}
+
+<h2 class="mb-4">Reservations</h2>
+
+<table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Guest</th>
+            <th>Room</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th class="text-center">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reservation in Model)
+        {
+            <tr id="reservation-@reservation.Id">
+                <td>@reservation.GuestName</td>
+                <td>@reservation.RoomNumber</td>
+                <td>@reservation.StartData.ToString("dd/MM/yyyy")</td>
+                <td>@reservation.EndData.ToString("dd/MM/yyyy")</td>
+                <td>
+                    <span>
+                        @reservation.Status
+                    </span>
+                </td>
+                <td class="text-center">
+                    <button class="btn btn-danger btn-sm" onclick="deleteReservation(@reservation.Id)">
+                        <i class="fas fa-trash-alt"></i> Delete
+                    </button>
+                    &nbsp;
+                    <a class="btn btn-success btn-sm" asp-area="Admin" asp-controller="Reservation"
+                       asp-action="Update" asp-route-id="@reservation.Id">
+                        Update
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+    <script>
+        function deleteReservation(id) {
+            if (confirm('Are you sure you want to delete this reservation? This action cannot be undone.')) {
+                $.ajax({
+                    url: '@Url.Action("Delete", "Reservation", new { area = "Admin" })',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (response) {
+                        if (response.success) {
+                            $("#reservation-" + id).fadeOut(500, function () { $(this).remove(); });
+                            alert(response.message);
+                        }
+                    },
+                    error: function () {
+                        alert('Error deleting reservation');
+                    }
+                });
+            }
+        }
+    </script>
+}

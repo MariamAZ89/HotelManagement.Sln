@@ -48,4 +48,9 @@ public class ReservationRepository : IReservationRepository
             await _context.SaveChangesAsync();
         }
     }
+
+    public Task<bool> IsRoomAvailableAsync(int roomId, DateTime startDate, DateTime endDate)
+    {
+       return Task.FromResult(true);
+    }
 }
